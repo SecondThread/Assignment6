@@ -1,16 +1,19 @@
 import java.util.*;
 
 public class HuffmanTree {
+	private static String[] symbols;
+
 	public static void main(String[] a) {
-		ArrayList<Node> nodes=new ArrayList<Node>();
-		nodes.add(new Node("A", .35));
-		nodes.add(new Node("B", .1));
-		nodes.add(new Node("C", .15));
-		nodes.add(new Node("D", .15));
-		nodes.add(new Node("_", .05));
-		nodes=sort(nodes);
-		for (Node n:nodes) {
-			System.out.println(n);
+		ArrayList<Node> nodes=getInput();
+		while(nodes.size()>1) {
+			nodes=sort(nodes);
+			nodes.add(new Node(nodes.get(0), nodes.get(1)));
+			nodes.remove(0);
+			nodes.remove(0);
+		}
+		System.out.println("The Huffman code for the given characters is:");
+		for (String s:symbols) {
+			findSymbol(s, nodes.get(0), "");
 		}
 	}
 
@@ -46,6 +49,27 @@ public class HuffmanTree {
 					continue hackToAvoidStackOverflowRecursion;
 			}
 			return toReturn;
+		}
+	}
+
+	public static ArrayList<Node> getInput() {
+		ArrayList<Node> toReturn=new ArrayList<Node>();
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter the symbols, each seperated by a space:");
+		symbols=s.nextLine().split(" ");
+		System.out.println("Enter the frequency of each corresponding symbol, each seperated by a space");
+		String[] frequenciesAsString=s.nextLine().split(" ");
+		for (int i=0; i<symbols.length; i++) {
+			if (symbols[i].isEmpty())
+				continue;
+			toReturn.add(new Node(symbols[i], Double.parseDouble(frequenciesAsString[i])));
+		}
+		return toReturn;
+	}
+
+	public static void findSymbol(String s, Node head, String previousCode) {
+		if () {
+			
 		}
 	}
 }
