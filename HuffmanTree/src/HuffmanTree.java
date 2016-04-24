@@ -68,8 +68,13 @@ public class HuffmanTree {
 	}
 
 	public static void findSymbol(String s, Node head, String previousCode) {
-		if () {
-			
+		if (head==null) {
+			return;
 		}
+		if (s.equals(head.name)) {
+			System.out.println(s+": "+previousCode);
+		}
+		findSymbol(s, head.left, previousCode+"0");
+		findSymbol(s, head.right, previousCode+"1");
 	}
 }
